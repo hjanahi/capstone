@@ -276,5 +276,15 @@ describe("GET /api/products pagination", () => {
       expect(res.status).toBe(500);
       expect(res.body.error).toBe("connection lost");
     });
+
+    it("passes a count rejection to the existing error handler", async () => {
+      Product.findAll.mockResolvedValue([makeProduct()]);
+      Product.countAll.mockRejectedValue(new Error("count failed"));
+
+      const res = await request(app).get("/api/products");
+
+      expect(res.status).toBe(500);
+      expect(res.body.error).toBe("count failed");
+    });
   });
 });
