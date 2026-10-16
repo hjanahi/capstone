@@ -94,7 +94,8 @@ No other application or test files may change without approval.
 | Retrieval query | Parameterized values and `ORDER BY name, id` |
 | No active override | Retrieval and count require `is_active = true` |
 | Database count is `"21"` | Model returns number `21` |
-| Model rejects | Existing error handler receives the error |
+| Retrieval rejects | Existing error handler receives the retrieval error |
+| Count rejects | Existing error handler receives the count error |
 
 Tests may parameterize similar invalid cases. Temporarily break one pagination behavior during verification, confirm a test fails, and revert the mutation.
 
@@ -115,7 +116,7 @@ Tests may parameterize similar invalid cases. Temporarily break one pagination b
 - The endpoint matches this contract.
 - Every matrix case is covered.
 - Targeted and complete tests pass.
-- Tests remain unchanged during implementation.
+- Tests are not weakened during implementation; later additions require an explicit review finding and approval.
 - `npm run lint` is attempted and its result reported.
 - Only approved files change.
 - The complete final diff is reviewed.
